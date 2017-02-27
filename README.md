@@ -24,6 +24,17 @@ Creating restheartdocker_mongodb_1
 Creating restheartdocker_restheart_1
 ```
 
+> If you get an error complaining about address/port already used (e.g. `ERROR: for mongodb  Cannot start service mongodb: ... listen tcp 0.0.0.0:27017: bind: address already in use`),
+> you can then locate which process is using it already and eventually kill it like so:
+
+```shell
+patechoc@Jarvis:restheart-docker$ sudo lsof -i :27017 | grep LISTEN
+[sudo] password for patechoc:         
+mongod  1025 mongodb    6u  IPv4  19424      0t0  TCP localhost:27017 (LISTEN)
+patechoc@Jarvis:restheart-docker$ sudo kill -9 1025
+```
+
+
 Check everything is fine:
 
 ```

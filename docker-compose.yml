@@ -10,6 +10,7 @@ networks:
 ### Creates a permanent, named data volume
 # This makes much easier to identify where the mongodb data is stored on host
 # See: https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-shared-storage-volume-as-a-data-volume
+#  Update link: https://docs.docker.com/engine/tutorials/dockervolumes/
 volumes:
    datavolume:
 
