@@ -247,7 +247,9 @@ python test_pymongo.py
 ### How to make Backup/Restore of your data
 
 RESTHeart is stateless, so just keep a copy of the configuration you have made and you are fine.
-Then of course you need to backup your data which is as simple as following the normal backup/restore procedure recommended by MongoDB.
+Then of course you need to backup your data which is as simple as following the normal backup/restore procedure [recommended by MongoDB](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/).
+
+#### Backup your data
 
 Here are some examples fo commands to backup your data:
 
@@ -285,6 +287,19 @@ or
 mongodump --host mongodb.example.net -- port 3107 --username justMe --password myPassword --out /opt/backup/mongodump_2017-02-28
 ```
 
+#### Restore data
+
+```shell
+mongorestore --port 3107 /home/backup/myBackupDirectory
+```
+
+or with more options
+ 
+```shell
+mongorestore --host mongodb1.example.net --port 3017 --username user --password pass /opt/backup/mongodump-2013-10-24
+```
+
+More options are of course available on [MongoDB website](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/).
 
 ## Build your own REST API documentation
 
