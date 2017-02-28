@@ -10,7 +10,7 @@
 $ docker build --build-arg=RELEASE=3.0.0 -t softinstigate/restheart:3.0.0 .
 ```
 
-## TL;DR - Use docker-compose
+## Use docker-compose
 
 RESTHeart fully embraces a [microservices](http://martinfowler.com/articles/microservices.html) architecture. The quickest way to run RESTHeart + MongoDB both as docker containers is to use [docker-compose](https://docs.docker.com/compose/).
 
@@ -203,6 +203,9 @@ Whenever the browser asks for credentials then use the following:
     username: admin
     password: changeit
 
+> Remember to change the password from `./etc/security.yml`
+
+
 ## Stop and start again
 
 To stop the RESTHeart background daemon just issue
@@ -233,6 +236,60 @@ Note that you must **always stop RESTHeart before MongoDB**, or you might experi
 
 When you containers are up and running you can go to the official [RESTHeart's Documentation](https://softinstigate.atlassian.net/wiki/display/RH/Documentation).
 
+### Basic example to interact with the database with pyMongo
+
+Check this file and run the example
+
+```shell
+python test_pymongo.py
+```
+
+### How to make Backup/Restore of your data
+
+RESTHeart is stateless, so just keep a copy of the configuration you have made and you are fine.
+Then of course you need to backup your data which is as simple as following the normal backup/restore procedure recommended by MongoDB.
+
+Here are some examples fo commands to backup your data:
+
+> Note that mongodump will overwrite any output files within the output directory. Remember to change the name of the files if you want to store older backups.
+
+
+```shell
+mongodump
+```
+
+or 
+
+```shell
+mongodump --host mongodb.example.net --port 27017
+```
+
+or 
+
+```shell
+mongodump --out /data/backupDirectory
+```
+
+> Note that the output here is simply a directory, not an output filename, as mongodump will generate as many BSON files as database you have to backup.
+
+or 
+
+```shell
+mongodump --collection myCollection --db testDB 
+```
+
+
+or 
+
+```shell
+mongodump --host mongodb.example.net -- port 3107 --username justMe --password myPassword --out /opt/backup/mongodump_2017-02-28
+```
+
+
+## Build your own REST API documentation
+
+No much experience here, but was told that [Swagger](http://swagger.io/) was the right tool for it! ;)
+
 <hr></hr>
 
-_Made with :heart: by [The SoftInstigate Team](http://www.softinstigate.com/). Follow us on [Twitter](https://twitter.com/softinstigate)_.
+_Made with :heart: by [The SoftInstigate Team](http://www.softinstigate.com/) adn tuned for our use @ [AIA Science](http://aiascience.com/). Follow SoftInstigate on [Twitter](https://twitter.com/softinstigate)_.
