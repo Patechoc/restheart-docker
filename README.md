@@ -4,13 +4,7 @@
 
 **Note**: This has been tested with docker version 1.12. Please [upgrade](https://docs.docker.com/engine/installation/) if you have an older docker version. To check your version: `$ docker -v`.
 
-## Build manually
-
-```
-$ docker build --build-arg=RELEASE=3.0.0 -t softinstigate/restheart:3.0.0 .
-```
-
-## Use docker-compose
+## Build using docker-compose (recommended)
 
 RESTHeart fully embraces a [microservices](http://martinfowler.com/articles/microservices.html) architecture. The quickest way to run RESTHeart + MongoDB both as docker containers is to use [docker-compose](https://docs.docker.com/compose/).
 
@@ -112,6 +106,14 @@ X-Powered-By: restheart.org
 ```
 
 See our [API Tutorial](https://softinstigate.atlassian.net/wiki/x/GICM) for more.
+
+
+## Build manually
+
+```
+$ docker build --build-arg=RELEASE=3.0.0 -t softinstigate/restheart:3.0.0 .
+```
+
 
 ## Build and run manually
 
@@ -244,6 +246,13 @@ Check this file and run the example
 python test_pymongo.py
 ```
 
+After that you can open your browser and make request to the RESTHeart REST API
+
+* [Get a list of all databases](http://localhost:8080/)
+* [Get a list of all collections of a database called "test-database"](http://localhost:8080/test-database)
+* [Get a list of all entries of a collection called "posts"](http://localhost:8080/test-database/posts)
+* [Filter the entries in a collection with "author" name "Eliot"](http://localhost:8080/test-database/posts?filter={'author':'Eliot'})
+
 ### How to make Backup/Restore of your data
 
 RESTHeart is stateless, so just keep a copy of the configuration you have made and you are fine.
@@ -279,7 +288,6 @@ or
 ```shell
 mongodump --collection myCollection --db testDB 
 ```
-
 
 or 
 
