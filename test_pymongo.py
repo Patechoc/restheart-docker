@@ -42,6 +42,7 @@ def test_mongo():
             "tags": ["mongodb", "python", "pymongo"],
             "date": datetime.datetime.utcnow()}
     posts = db.posts
+    print("\nInserting one entry in the database")
     post_id = posts.insert_one(post).inserted_id
 
     ## Find one document
@@ -58,15 +59,18 @@ def test_mongo():
                   "title": "MongoDB is fun",
                   "text": "and pretty easy too!",
                   "date": datetime.datetime(2009, 11, 10, 10, 45)}]
+    print("\nInserting many entries at once")
     result = posts.insert_many(new_posts)
     pprint(result.inserted_ids)
 
-    ## Find all documents that match a given query
-    
+    ## Find one document that match a given query
+    print("\nSearching for one entry in the database with 'Eliot' as 'author'")
+    pprint(posts.find_one({"author": "Eliot"}))
 
     ## Find all documents that match a given query
-    
-    
+    print("\nSearching for all entires in the database that match ....")
+    for post in posts.find({"author": "Mike"}):
+        pprint(post)
     
 def test_RESTHeart():
     pass
